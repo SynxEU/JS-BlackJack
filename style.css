@@ -60,9 +60,27 @@ button:hover {
     display: flex;
     justify-content: center;
     gap: 10px;
+    position: relative;
 }
 
 .cards img {
+    max-width: 100px;
+    max-height: 150px;
+    position: relative;
+}
+
+#deck-count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.cardBackGround {
     max-width: 100px;
     max-height: 150px;
 }

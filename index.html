@@ -8,6 +8,10 @@
 </head>
 <body>
     <h1>Blackjack Game</h1>
+    <div id="player-setup">
+        <input type="number" id="player-count" placeholder="Enter number of players">
+        <button id="add-players">Add Players</button>
+    </div>
     <div id="game">
         <div id="dealer-hand">
             <h2>Dealer's Hand</h2>
@@ -16,9 +20,11 @@
         <div id="player-hands">
             <h2>Player Hand(s)</h2>
         </div>
-        <button id="Start">Start</button>
+        <button id="start">Start the game</button>
         <button id="hit">Hit</button>
         <button id="stand">Stand</button>
+        <div id="result"></div>
+    </div>
         <div id="result"></div>
         <div id="deck-count">
             <img src="Card_Pictures/CardBackGround.jpg">
