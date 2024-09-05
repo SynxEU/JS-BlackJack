@@ -5,7 +5,7 @@
 ## Table of content
 * [Tags](#Tags)
 * [Change Log](#Changelog)
-* [Known Issues](#KnownIssues)
+* [Known Issues](#Issues)
 
 ## Intro
 This is a school project. \
@@ -29,7 +29,7 @@ If you're the closes to 21 or hits 21 you will win (aslong as it isn't over 21).
 ## Changelog
 [Github](https://github.com/SynxEU/JS-BlackJack/commits/main/)
 
-## Known Issues
+## Issues
 No pretty webdesign. \
 Buggy multiplayer. \
 No card pictures.
