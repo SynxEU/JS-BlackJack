@@ -5,7 +5,7 @@
 ## Table of content
 * [Tags](#Tags)
 * [Change Log](#Changelog)
-* [Known Issues](#Issues)
+* [Known Issues](#KnownIssues)
 
 ## Intro
 This is a school project. \
