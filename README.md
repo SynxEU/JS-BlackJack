@@ -32,7 +32,7 @@ If you're the closes to 21 or hits 21 you will win (aslong as it isn't over 21).
 ## Issues
 No pretty webdesign. \
 Buggy multiplayer. \
-No card pictures. \
+No card pictures.
 
 
 ## V0.0.0 til V1.0.0:
