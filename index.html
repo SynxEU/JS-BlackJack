@@ -14,21 +14,27 @@
     </div>
     <div id="game">
         <div id="dealer-hand">
-            <h2>Dealer's Hand</h2>
+            <div class="dealer-header">
+                <h2>Dealer's Hand</h2>
+                <div id="deck-count">
+                    <img src="Card_Pictures/Card_Back.png" alt="Card Back">
+                    <span id="deck-number">52</span>
+                </div>
+            </div>
             <div class="cards"></div>
         </div>
         <div id="player-hands">
             <h2>Player Hand(s)</h2>
+            <div class="cards"></div>
         </div>
-        <button id="start">Start the game</button>
-        <button id="hit">Hit</button>
-        <button id="stand">Stand</button>
+        <div id="Buttons">
+            <button id="start">Start the game</button>
+            <button id="hit">Hit</button>
+            <button id="stand">Stand</button>
+        </div>
         <div id="result"></div>
     </div>
         <div id="result"></div>
-        <div id="deck-count">
-            <img src="Card_Pictures/CardBackGround.jpg">
-        </div>
     </div>
     <script src="main.js"></script>
 </body>

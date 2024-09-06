@@ -1,5 +1,6 @@
 const suits = ["Spades", "Hearts", "Diamonds", "Clubs"];
 const values = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"];
+const weights = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11];
 var deck;
 var players;
 var dealerHand = new Array();
@@ -13,15 +14,9 @@ function createDeck()
     {
         for (var x = 0; x < suits.length; x++)
         {
-            //Finds the weight of the cards based on the value
-            var weight = parseInt(values[i]);
-            if (values[i] == "J" || values[i] == "Q" || values[i] == "K")
-                weight = 10;
-            if (values[i] == "A")
-                weight = 11;
-
             //Card object to push into the deck array
-            var card = { Value: values[i], Suit: suits[x], Weight: weight };
+            var card = { Value: values[i], Suit: suits[x], Weight: weights[i] };
+            console.log(weights[i]);
             deck.push(card);
         }
     }
@@ -45,8 +40,7 @@ function createPlayers(amount)
     players = new Array();
     for (var i = 1; i <= amount; i++)
     {
-        var hand = new Array();
-        var player = { Name: 'Player ' + i, ID: i, Points: 0, Hand: hand }
+        var player = { Name: 'Player ' + i, ID: i, Points: 0, Hand: new Array() }
         players.push(player)
     }
 }
@@ -73,7 +67,7 @@ function calculateHandValue(hand) {
 }
 
 function updateDeckCount() {
-    document.getElementById('deck-count').textContent = `Deck count: ${deck.length}`;
+    document.getElementById('deck-number').textContent = deck.length;
 }
 
 function renderGame() {
@@ -83,14 +77,14 @@ function renderGame() {
 
     // Show the first dealer card as a face-down card
     const cardBackImg = document.createElement('img');
-    cardBackImg.src = `images/CardBackGround.jpg`;
+    cardBackImg.src = `Card_Pictures/Card_Back.png`;
     cardBackImg.classList.add('cardBackGround');
     dealerDiv.appendChild(cardBackImg);
 
     // Show the rest of the dealer's cards as normal
     dealerHand.slice(1).forEach(card => {
         const img = document.createElement('img');
-        img.src = `images/${card.Value}_of_${card.Suit}.png`;
+        img.src = `Card_Pictures/${card.Value}_of_${card.Suit}.png`;
         dealerDiv.appendChild(img);
     });
 
@@ -100,13 +94,13 @@ function renderGame() {
 
     players.forEach((player) => {
         const handDiv = document.createElement('div');
-        handDiv.innerHTML = `<h3>${player.Name}</h3>`;
+        handDiv.innerHTML = `<h3>${player.Name}: ${player.Points} points</h3>`;
         player.Hand.forEach(card => {
             const img = document.createElement('img');
-            img.src = `images/${card.Value}_of_${card.Suit}.png`;
+            img.src = `Card_Pictures/${card.Value}_of_${card.Suit}.png`;
             handDiv.appendChild(img);
         });
-        player.appendChild(handDiv);
+        playerDiv.appendChild(handDiv);
     });
 
     updateDeckCount();
@@ -130,29 +124,29 @@ function startGame(amount) {
     createPlayers(amount);
     
     // Deal two cards to the dealer
-    dealerHand = [dealCard({ Hand: [] }), dealCard({ Hand: [] })];
+    dealerHand = [dealCards({ Hand: [] }), dealCards({ Hand: [] })];
 
-    // Deal two cards to each player
+    // Deal two cards to each player and "calculates" hand value
     players.forEach(player => {
-        dealCard(player);
-        dealCard(player);
+        dealCards(player);
+        dealCards(player);
+        player.Points = calculateHandValue(player.Hand);
     });
-
     renderGame();
 }
 
 function determinWinner()
 {
-    const dealerValue = calculateHandValue(dealerHand);
+    let dealerValue = calculateHandValue(dealerHand);
     const results = new Array();
 
     players.forEach(player => {
-        const playerValue = calculateHandValue(player.Hand);
+        let playerValue = calculateHandValue(player.Hand);
         let result = `${player.Name} has ${playerValue}.`
 
         if (playerValue > 21) {
             result += `${player.Name} busts and loses.`;
-        } else if (dealerValue > 21 && playerValue <= 21 || playerValue > dealerValue && playerValue <= 21  ) {
+        } else if (playerValue === 21 || playerValue > dealerValue && playerValue <= 21  ) {
             result += `${player.Name} wins!`;
         } else if (playerValue === dealerValue) {
             result += `It's a tie for ${player.Name}.`;
@@ -175,12 +169,14 @@ document.getElementById('start').addEventListener('click', () => {
 document.getElementById('hit').addEventListener('click', () => {
     dealCards(players[currentPlayer]);
 
-    if (calculateHandValue(players[currentPlayer].Hand) > 21) {
+    players[currentPlayer].Points = calculateHandValue(players[currentPlayer].Hand);
+
+    if (players[currentPlayer].points > 21) {
         document.querySelector('#result').textContent = `${players[currentPlayer].Name} busts!`;
         currentPlayer++;
     }
 
-    if (currentPlayer >= players.length) {
+    if (currentPlayer > players.length) {
         dealerTurn();
     } else {
         renderGame();
@@ -201,7 +197,7 @@ document.getElementById('stand').addEventListener('click', () => {
 function dealerTurn() {
     // Draws till he hits 17
     while (calculateHandValue(dealerHand) < 17) {
-        dealCard({ Hand: dealerHand });
+        dealCards({ Hand: dealerHand });
     }
 
     determinWinner();

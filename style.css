@@ -20,6 +20,8 @@ h1 {
     width: 80%;
     max-width: 1200px;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -28,6 +30,7 @@ h1 {
 h2 {
     font-size: 2rem;
     color: #333;
+    margin: 0;
 }
 
 button {
@@ -52,6 +55,53 @@ button:hover {
     color: #333;
 }
 
+#player-setup {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Space between input and button */
+}
+
+#player-count {
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    width: 200px;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#player-count:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
+}
+
+#add-players {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#add-players:hover {
+    background-color: #0056b3;
+}
+
+
+
+.dealer-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 #dealer-hand, #player-hands {
     margin-bottom: 20px;
 }
@@ -66,30 +116,38 @@ button:hover {
 .cards img {
     max-width: 100px;
     max-height: 150px;
+    width: 100px;
+    height: 150px;
     position: relative;
 }
 
 #deck-count {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 1rem;
-}
-
-.cardBackGround {
-    max-width: 100px;
-    max-height: 150px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-left: 20px; 
+    margin-bottom: 20px;
 }
 
 #deck-count img {
-    max-width: 100px;
-    max-height: 150px;
+    max-width: 60px;
+    max-height: 90px;
+    position: relative;
 }
 
+#deck-number {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    z-index: 1;
+}
+
+/* Media queries for responsiveness */
 @media (max-width: 768px) {
     #game {
         width: 90%;
