@@ -83,5 +83,3 @@ Can only play local multiplayer
 * Website & Design
 * WebSocket (For multiplayer)
 * Animations (if possible)
-* Add card pictures
-* Split
