@@ -20,10 +20,11 @@ If you're the closes to 21 or hits 21 you will win (aslong as it isn't over 21).
 
 |    Language    | projectVersion | 
 | -------------- | -------------- |
-|   JavaScript   |     v0.0.5     |
+|   JavaScript   |     v0.0.6     |
 | -------------- | -------------- |
 
 ## Tags
+* [v0.0.6](https://github.com/SynxEU/JS-BlackJack/releases/tag/v0.0.6)
 * [v0.0.5](https://github.com/SynxEU/JS-BlackJack/releases/tag/v0.0.5)
 
 ## Changelog
@@ -31,11 +32,30 @@ If you're the closes to 21 or hits 21 you will win (aslong as it isn't over 21).
 
 ## Known Issues
 No pretty webdesign. \
-Buggy multiplayer. \
-No card pictures.
+Can only play local multiplayer
 
 
 ## V0.0.0 til V1.0.0:
+
+#### v0.0.6
+* Removed
+  * Unnecessary lines
+  * Some comments
+* Changed:
+  * Postioning of some code blocks
+  * Some operators
+  * Start button to only activate if the player count is between 1 and 8
+  * Dealers first card is hidden but will change when its his/her turn
+* Added:
+  * Split hands if equal value
+  * So it only shows the current players hand
+  * Toggle buttons to display/not display certain buttons when the game is running and if its not running
+  * Drawing, players can now draw with eachother and the dealer
+  * Alert if a player hits 21 when they hit. Then their turn skips after 750 ms
+* Fixed:
+  * Result display works now
+  * Multiplayer now works
+  * Cards now gets displayed
 
 #### v0.0.5
 * Added almost all functions
@@ -63,5 +83,3 @@ No card pictures.
 * Website & Design
 * WebSocket (For multiplayer)
 * Animations (if possible)
-* Add card pictures
-* Split
