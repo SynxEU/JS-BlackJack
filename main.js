@@ -1,7 +1,13 @@
 const suits = ["Spades", "Hearts", "Diamonds", "Clubs"];
 const values = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"];
 const weights = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11];
-let deck, players, dealerHand = [], playerCount, currentPlayer = 0, gameRunning = false, dealerTurnStarted = false;
+let deck, 
+    players, 
+    dealerHand = [], 
+    playerCount, 
+    currentPlayer = 0, 
+    gameRunning = false, 
+    dealerTurnStarted = false;
 
 //#region Classes
 class Player {
@@ -23,6 +29,7 @@ class Card {
 }
 //#endregion
 
+//#region Start game
 function startGame(amount) {
     createDeck();
     shuffleCards();
@@ -39,6 +46,7 @@ function startGame(amount) {
     toggleButtons();
     renderGame();
 }
+//#endregion
 
 //#region Deck
 function createDeck() {
@@ -92,6 +100,7 @@ function calculateHandValue(hand) {
 }
 //#endregion
 
+//#region Dealer
 function dealerTurn() {
     dealerTurnStarted = true;
     while (calculateHandValue(dealerHand) < 17) {
@@ -102,6 +111,7 @@ function dealerTurn() {
     toggleButtons();
     renderGame();
 }
+//#endregion
 
 //#region Choose winner
 function determineWinner() {
@@ -113,12 +123,12 @@ function determineWinner() {
     // Define a function to determine outcome based on conditions
     const checkOutcome = (playerValue, playerType, playerName) => {
         let conditionMappings = [
-            { condition: playerValue > 21, result: `${playerName} (${playerType}) busts with ${playerValue}. Dealer wins.` },
-            { condition: dealerValue > 21, result: `${playerName} (${playerType}) wins with ${playerValue}! Dealer busts with ${dealerValue}.` },
+            { condition: playerValue === 21 && playerValue === dealerValue, result: `${playerName} (${playerType}) wins with ${playerValue}. Dealer loses` },
+            { condition: dealerValue > 21 && playerValue <= 21, result: `${playerName} (${playerType}) wins with ${playerValue}! Dealer busts with ${dealerValue}.` },
             { condition: playerValue > dealerValue, result: `${playerName} (${playerType}) wins with ${playerValue} against dealer's ${dealerValue}.` },
             { condition: playerValue === dealerValue && playerValue !== 21, result: `${playerName} (${playerType}) draws with the dealer. Both have ${playerValue}.` },
             { condition: playerValue < dealerValue, result: `${playerName} (${playerType}) loses with ${playerValue} against dealer's ${dealerValue}.` },
-            { condition: playerValue === 21 && playerValue === dealerValue, result: `${playerName} (${playerType}) wins with ${playerValue}. Dealer loses` },
+            { condition: playerValue > 21, result: `${playerName} (${playerType}) busts with ${playerValue}. Dealer wins.` }
         ];
 
         // Find the first matching condition and return the result
@@ -153,7 +163,7 @@ function determineWinner() {
 function renderGame() {
     const dealerDiv = document.querySelector('#dealer-hand .cards');
     dealerDiv.innerHTML = '';
-    
+
     // Show dealer's first card hidden, reveal all if it's dealer's turn
     if (dealerTurnStarted) {
         dealerHand.forEach(card => {
@@ -203,11 +213,7 @@ function renderGame() {
 }
 //#endregion
 
-//#region Document
-function updateDeckCount() {
-    document.getElementById('deck-number').textContent = deck.length;
-}
-
+//#region Event Listener
 document.getElementById('start').addEventListener('click', () => {
     playerCount = parseInt(document.getElementById('player-count').value);
     if (isNaN(playerCount) || playerCount <= 0 || playerCount > 8) {
@@ -318,4 +324,7 @@ function toggleButtons() {
     }
 }
 
+function updateDeckCount() {
+    document.getElementById('deck-number').textContent = deck.length;
+}
 //#endregion
