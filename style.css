@@ -1,13 +1,26 @@
+:root {
+    --background-color-light: #ffffff;
+    --text-color-light: #121212;
+    --background-color-dark: #121212;
+    --text-color-dark: #ffffff;
+  }
+
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #f0f0f0;
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
     font-family: Arial, sans-serif;
     flex-direction: column;
 }
+
+.dark-mode {
+    background-color: var(--background-color-dark);
+    color: var(--text-color-dark);
+  }
 
 h1 {
     font-size: 2.5rem;

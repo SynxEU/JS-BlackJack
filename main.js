@@ -104,71 +104,45 @@ function dealerTurn() {
 //#region Determine winner
 function determineWinner() {
     let dealerValue = calculateHandValue(dealerHand);
-    let highestScore = 0;
-    let drawPlayers = [];
-    let potentialWinners = [];
+    let resultsContainer = document.querySelector('#result');
 
-    // Loop through players to determine scores and possible draws
+    // Clear any previous results
+    resultsContainer.innerHTML = '';
+
+    // Define a function to determine outcome based on conditions
+    const checkOutcome = (playerValue, playerType, playerName) => {
+        let conditionMappings = [
+            { condition: playerValue > 21, result: `${playerName} (${playerType}) busts with ${playerValue}. Dealer wins.` },
+            { condition: dealerValue > 21, result: `${playerName} (${playerType}) wins! Dealer busts with ${dealerValue}.` },
+            { condition: playerValue > dealerValue, result: `${playerName} (${playerType}) wins with ${playerValue} against dealer's ${dealerValue}.` },
+            { condition: playerValue === dealerValue, result: `${playerName} (${playerType}) draws with the dealer. Both have ${playerValue}.` },
+            { condition: playerValue < dealerValue, result: `${playerName} (${playerType}) loses with ${playerValue} against dealer's ${dealerValue}.` }
+        ];
+
+        // Find the first matching condition and return the result
+        for (let mapping of conditionMappings) {
+            if (mapping.condition) return mapping.result;
+        }
+    };
+
     players.forEach(player => {
         let playerValue = calculateHandValue(player.Hand);
+        let playerSplitValue = player.SplitHand.length > 0 ? calculateHandValue(player.SplitHand) : null;
 
-        // Track the highest score among players
-        if (playerValue <= 21) {
-            if (playerValue > highestScore) {
-                highestScore = playerValue;
-                potentialWinners = [player];
-            } else if (playerValue === highestScore) {
-                potentialWinners.push(player);
-            }
-        }
+        // Check outcome for main hand
+        let mainHandResult = checkOutcome(playerValue, 'main hand', player.Name);
+        let mainHandElement = document.createElement('p');
+        mainHandElement.textContent = mainHandResult;
+        resultsContainer.appendChild(mainHandElement);
 
-        // Check for split hand value
-        if (player.SplitHand.length > 0) {
-            let splitValue = calculateHandValue(player.SplitHand);
-            if (splitValue <= 21) {
-                if (splitValue > highestScore) {
-                    highestScore = splitValue;
-                    potentialWinners = [player];
-                } else if (splitValue === highestScore) {
-                    potentialWinners.push(player);
-                }
-            }
-        }
-
-        // Check for draw condition with the dealer
-        if (playerValue === dealerValue && playerValue <= 21) {
-            drawPlayers.push(player);
+        // Check outcome for split hand (if applicable)
+        if (playerSplitValue !== null) {
+            let splitHandResult = checkOutcome(playerSplitValue, 'split hand', player.Name);
+            let splitHandElement = document.createElement('p');
+            splitHandElement.textContent = splitHandResult;
+            resultsContainer.appendChild(splitHandElement);
         }
     });
-
-    let results = [];
-
-    // Check if dealer wins
-    if (dealerValue <= 21 && dealerValue > highestScore) {
-        results.push(`Dealer wins with ${dealerValue} points! All players lose.`);
-    } else {
-        // Check if dealer and players draw
-        if (dealerValue <= 21 && dealerValue === highestScore) {
-            drawPlayers.push(...potentialWinners);
-        }
-
-        if (potentialWinners.length === 1) {
-            results.push(`${potentialWinners[0].Name} wins with ${highestScore} points!`);
-        } else if (drawPlayers.length > 0) {
-            // Draw with the dealer or among players
-            drawPlayers.forEach(player => {
-                results.push(`${player.Name} draws with ${highestScore} points!`);
-            });
-        } else {
-            players.forEach(player => {
-                if (!drawPlayers.includes(player) && !potentialWinners.includes(player)) {
-                    results.push(`${player.Name} loses.`);
-                }
-            });
-        }
-    }
-
-    document.querySelector('#result').textContent = results.join(' ');
 }
 //#endregion
 
@@ -309,7 +283,7 @@ document.getElementById('restart').addEventListener('click', () => {
 
 //#endregion
 
-//#region Buttons0
+//#region extra
 function toggleButtons() {
     const startBtn = document.getElementById('start');
     const restartBtn = document.getElementById('restart');
@@ -330,4 +304,5 @@ function toggleButtons() {
         splitBtn.style.display = 'none';
     }
 }
+
 //#endregion
