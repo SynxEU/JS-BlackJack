@@ -43,9 +43,11 @@ function startGame(amount) {
 //#region Deck
 function createDeck() {
     deck = [];
-    for (let i = 0; i < values.length; i++) {
-        for (let x = 0; x < suits.length; x++) {
-            deck.push(new Card(values[i], suits[x], weights[i]));
+    for (let d = 0; d < 3; d++) {
+        for (let i = 0; i < values.length; i++) {
+            for (let x = 0; x < suits.length; x++) {
+                deck.push(new Card(values[i], suits[x], weights[i]));
+            }
         }
     }
 }
@@ -113,10 +115,11 @@ function determineWinner() {
     const checkOutcome = (playerValue, playerType, playerName) => {
         let conditionMappings = [
             { condition: playerValue > 21, result: `${playerName} (${playerType}) busts with ${playerValue}. Dealer wins.` },
-            { condition: dealerValue > 21, result: `${playerName} (${playerType}) wins! Dealer busts with ${dealerValue}.` },
+            { condition: dealerValue > 21, result: `${playerName} (${playerType}) wins with ${playerValue}! Dealer busts with ${dealerValue}.` },
             { condition: playerValue > dealerValue, result: `${playerName} (${playerType}) wins with ${playerValue} against dealer's ${dealerValue}.` },
-            { condition: playerValue === dealerValue, result: `${playerName} (${playerType}) draws with the dealer. Both have ${playerValue}.` },
-            { condition: playerValue < dealerValue, result: `${playerName} (${playerType}) loses with ${playerValue} against dealer's ${dealerValue}.` }
+            { condition: playerValue === dealerValue && playerValue !== 21, result: `${playerName} (${playerType}) draws with the dealer. Both have ${playerValue}.` },
+            { condition: playerValue < dealerValue, result: `${playerName} (${playerType}) loses with ${playerValue} against dealer's ${dealerValue}.` },
+            { condition: playerValue === 21 && playerValue === dealerValue, result: `${playerName} (${playerType}) wins with ${playerValue}. Dealer loses` },
         ];
 
         // Find the first matching condition and return the result
@@ -217,6 +220,16 @@ document.getElementById('start').addEventListener('click', () => {
 document.getElementById('hit').addEventListener('click', () => {
     let currentPlayerHand = players[currentPlayer].Hand;
     let splitHand = players[currentPlayer].SplitHand;
+
+    if (currentPlayerHand === 7) {
+        alert("You can't draw anymore cards")
+        currentPlayer++;
+            if (currentPlayer >= players.length) {
+                dealerTurn();
+            } else {
+                renderGame();
+            }
+    }
 
     if (splitHand.length === 2) {
         dealCards(players[currentPlayer]);
