@@ -146,6 +146,7 @@ function determineWinner() {
             resultsContainer.appendChild(splitHandElement);
         }
     });
+    updateDeckCount();
 }
 //#endregion
 
