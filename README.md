@@ -32,7 +32,8 @@ If you're the closes to 21 or hits 21 you will win (aslong as it isn't over 21).
 [Github](https://github.com/SynxEU/JS-BlackJack/commits/main/)
 
 ## Known Issues
-Can only play local.
+Can only play local. \
+Dark mode not implemented
 
 ## V0.0.0 til V1.0.0:
 
