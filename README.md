@@ -34,7 +34,6 @@ If you're the closes to 21 or hits 21 you will win (aslong as it isn't over 21).
 ## Known Issues
 Can only play local.
 
-
 ## V0.0.0 til V1.0.0:
 
 #### v0.0.7
