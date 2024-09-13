@@ -108,7 +108,6 @@ function determineWinner() {
     let dealerValue = calculateHandValue(dealerHand);
     let resultsContainer = document.querySelector('#result');
 
-    // Clear any previous results
     resultsContainer.innerHTML = '';
 
     // Define a function to determine outcome based on conditions
@@ -138,7 +137,7 @@ function determineWinner() {
         mainHandElement.textContent = mainHandResult;
         resultsContainer.appendChild(mainHandElement);
 
-        // Check outcome for split hand (if applicable)
+        // Check outcome for split hand (if splithand exists)
         if (playerSplitValue !== null) {
             let splitHandResult = checkOutcome(playerSplitValue, 'split hand', player.Name);
             let splitHandElement = document.createElement('p');
