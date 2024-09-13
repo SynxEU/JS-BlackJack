@@ -104,6 +104,6 @@ Dark mode not implemented.
 
 # To-do
 
-* Website & Design
-* WebSocket (For multiplayer)
-* Animations (if possible)
+* Better UI
+* Online multiplayer (Only plays local at the moment)
+* Animations
