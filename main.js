@@ -103,7 +103,7 @@ function dealerTurn() {
     renderGame();
 }
 
-//#region Determine winner
+//#region Choose winner
 function determineWinner() {
     let dealerValue = calculateHandValue(dealerHand);
     let resultsContainer = document.querySelector('#result');
