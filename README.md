@@ -39,11 +39,9 @@ Can only play local.
 #### v0.0.7
 * Added:
    * Variables for dark and light mode
-
 * Edited:
    * DetermineWinner, it now contains a condition instead of ifs.
    * Individual players are against dealer and not a free for all.
-
 * Removed:
    * Addplayers button 
 
