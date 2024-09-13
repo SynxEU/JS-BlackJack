@@ -20,10 +20,11 @@ If you're the closes to 21 or hits 21 you will win (aslong as it isn't over 21).
 
 |    Language    | projectVersion | 
 | -------------- | -------------- |
-|   JavaScript   |     v0.0.6     |
+|   JavaScript   |     v0.0.7     |
 | -------------- | -------------- |
 
 ## Tags
+* [v0.0.7](https://github.com/SynxEU/JS-BlackJack/releases/tag/v0.0.7)
 * [v0.0.6](https://github.com/SynxEU/JS-BlackJack/releases/tag/v0.0.6)
 * [v0.0.5](https://github.com/SynxEU/JS-BlackJack/releases/tag/v0.0.5)
 
@@ -32,10 +33,21 @@ If you're the closes to 21 or hits 21 you will win (aslong as it isn't over 21).
 
 ## Known Issues
 No pretty webdesign. \
-Can only play local multiplayer
+Can only play local multiplayer. 
 
 
 ## V0.0.0 til V1.0.0:
+
+#### v0.0.7
+* Added:
+  * Variables for dark and light mode
+
+* Edited:
+  * DetermineWinner, it now contains a condition instead of ifs.
+  * Individual players are against dealer and not a free for all
+
+* Removed:
+  * Addplayers button 
 
 #### v0.0.6
 * Removed
@@ -60,21 +72,36 @@ Can only play local multiplayer
 #### v0.0.5
 * Added almost all functions
   *  createDeck
+     * Creates your deck
   *  shuffleCards
+     * Shuffles your cards 
   *  createPlayers
+     * Creates the amount of players you input 
   *  dealCards
+     * Deals cards to the current player
   *  calculateHandValue
+     * Calculates the hand value of players and dealer
   *  updateDeckCount
+     * Just updates the amount of cards in the deck
   *  renderGame
+     * Renders the game, so cards, buttons, deck count, players and dealer
   *  startGame
+     * Starts the game
   *  determinWinner
+     * Determines winner after dealers turn
   *  dealerTurn
+     * If all players are done hitting or stand it switches to the dealer
 * Document.getElement for
   * Hit
+     * Hits (draw cards) loses if you get higher than 21
   * Stand
+     * Goes on to the next person
   * Start game
+     * Starts the game
   * Add players
+     * Add players (removed in later version)
   * Updateable deck count
+     * Updates the deck count
 * Made some HTML (Not pretty or really functional)
 * Made some CSS (Not pretty or really functional)
 
