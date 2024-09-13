@@ -32,22 +32,19 @@ If you're the closes to 21 or hits 21 you will win (aslong as it isn't over 21).
 [Github](https://github.com/SynxEU/JS-BlackJack/commits/main/)
 
 ## Known Issues
-No pretty webdesign. \
-Can only play local multiplayer. 
-
+Can only play local. \
+Dark mode not implemented.
 
 ## V0.0.0 til V1.0.0:
 
 #### v0.0.7
 * Added:
-  * Variables for dark and light mode
-
+   * Variables for dark and light mode
 * Edited:
-  * DetermineWinner, it now contains a condition instead of ifs.
-  * Individual players are against dealer and not a free for all
-
+   * DetermineWinner, it now contains conditions instead of ifs.
+   * Individual players are against dealer and not a free for all.
 * Removed:
-  * Addplayers button 
+   * Addplayers button 
 
 #### v0.0.6
 * Removed
@@ -107,6 +104,6 @@ Can only play local multiplayer.
 
 # To-do
 
-* Website & Design
-* WebSocket (For multiplayer)
-* Animations (if possible)
+* Better UI
+* Online multiplayer (Only plays local at the moment)
+* Animations
